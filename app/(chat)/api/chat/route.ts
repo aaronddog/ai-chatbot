@@ -176,7 +176,7 @@ export async function POST(request: Request) {
     const stream = createUIMessageStream({
       execute: ({ writer: dataStream }) => {
         const result = streamText({
-          model: myProvider.languageModel(selectedChatModel),
+          model: 'openai/gpt-5',
           system: systemPrompt({ selectedChatModel, requestHints }),
           messages: convertToModelMessages(uiMessages),
           stopWhen: stepCountIs(5),
@@ -200,8 +200,9 @@ export async function POST(request: Request) {
             }),
           },
           experimental_telemetry: {
-            isEnabled: isProductionEnvironment,
-            functionId: "stream-text",
+            isEnabled: true,
+            // functionId: "stream-text",
+            // tracer: trace.getTracer('ai'), // this tracer will be patched to format and send created spans to Datadog LLM Observability
           },
           onFinish: async ({ usage }) => {
             try {
