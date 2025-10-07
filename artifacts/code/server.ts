@@ -16,6 +16,9 @@ export const codeDocumentHandler = createDocumentHandler<"code">({
       schema: z.object({
         code: z.string(),
       }),
+      experimental_telemetry: {
+        isEnabled: true,
+      },
     });
 
     for await (const delta of fullStream) {
@@ -49,6 +52,9 @@ export const codeDocumentHandler = createDocumentHandler<"code">({
       schema: z.object({
         code: z.string(),
       }),
+      experimental_telemetry: {
+        isEnabled: true,
+      },
     });
 
     for await (const delta of fullStream) {

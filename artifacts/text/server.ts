@@ -14,6 +14,9 @@ export const textDocumentHandler = createDocumentHandler<"text">({
         "Write about the given topic. Markdown is supported. Use headings wherever appropriate.",
       experimental_transform: smoothStream({ chunking: "word" }),
       prompt: title,
+      experimental_telemetry: {
+        isEnabled: true,
+      },
     });
 
     for await (const delta of fullStream) {
@@ -49,6 +52,9 @@ export const textDocumentHandler = createDocumentHandler<"text">({
             content: document.content,
           },
         },
+      },
+      experimental_telemetry: {
+        isEnabled: true,
       },
     });
 

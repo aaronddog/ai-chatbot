@@ -163,6 +163,18 @@ export function Chat({
           selectedVisibilityType={initialVisibilityType}
         />
 
+        <div className="mx-auto w-full max-w-4xl px-4 py-2">
+          <button
+            className="rounded-md bg-red-600 px-4 py-2 font-semibold text-sm text-white hover:bg-red-700"
+            onClick={() => {
+              throw new Error("Datadog Setup Verification Test Error");
+            }}
+            type="button"
+          >
+            🐛 Datadog Test Error
+          </button>
+        </div>
+
         <Messages
           chatId={id}
           isArtifactVisible={isArtifactVisible}

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import { Toaster } from "sonner";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -72,6 +73,27 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <Script
+          id="dd-rum-sync"
+          src="https://www.datadoghq-browser-agent.com/us1/v6/datadog-rum.js"
+          strategy="beforeInteractive"
+          type="text/javascript"
+        />
+        <Script id="datadog-rum" strategy="beforeInteractive">
+          {`
+            window.DD_RUM && window.DD_RUM.init({
+              applicationId: '${process.env.NEXT_PUBLIC_DD_RUM_APPLICATION_ID || ""}',
+              clientToken: '${process.env.NEXT_PUBLIC_DD_RUM_CLIENT_TOKEN || ""}',
+              site: '${process.env.NEXT_PUBLIC_DD_SITE || ""}',
+              service: '${process.env.NEXT_PUBLIC_DD_SERVICE || ""}',
+              env: '${process.env.NEXT_PUBLIC_DD_ENV || ""}',
+              version: '${process.env.NEXT_PUBLIC_DD_VERSION || ""}',
+              sessionSampleRate: 100,
+              sessionReplaySampleRate: 100,
+              defaultPrivacyLevel: 'allow',
+            });
+          `}
+        </Script>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

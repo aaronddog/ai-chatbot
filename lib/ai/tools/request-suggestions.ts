@@ -48,6 +48,9 @@ export const requestSuggestions = ({
           suggestedSentence: z.string().describe("The suggested sentence"),
           description: z.string().describe("The description of the suggestion"),
         }),
+        experimental_telemetry: {
+          isEnabled: true,
+        },
       });
 
       for await (const element of elementStream) {
