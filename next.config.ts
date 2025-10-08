@@ -1,13 +1,17 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: [
-    'graphql/language/visitor',
-    'graphql/language/printer',
-    'graphql/utilities'
-  ],
   experimental: {
     ppr: true,
+    turbo: {
+      resolveAlias: {
+        // Stub out graphql imports that dd-trace's graphql plugin uses
+        // We don't need these since we're not using the graphql plugin
+        'graphql/language/visitor': './lib/stubs/graphql-stub.js',
+        'graphql/language/printer': './lib/stubs/graphql-stub.js',
+        'graphql/utilities': './lib/stubs/graphql-stub.js',
+      },
+    },
   },
   images: {
     remotePatterns: [
@@ -16,17 +20,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // webpack: (config, { isServer }) => {
-
-  //   const externals = [
-  //     // required if you encounter graphql errors during the build step
-  //     'graphql/language/visitor',
-  //     'graphql/language/printer',
-  //     'graphql/utilities'
-  //   ];
-  //   config.externals.push(...externals);
-  //   return config;
-  // },
+  serverExternalPackages: ["ai"],
 };
 
 export default nextConfig;
