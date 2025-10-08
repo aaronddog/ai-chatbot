@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: [
+    'graphql/language/visitor',
+    'graphql/language/printer',
+    'graphql/utilities'
+  ],
   experimental: {
     ppr: true,
   },
@@ -11,17 +16,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  webpack: (config, { isServer }) => {
+  // webpack: (config, { isServer }) => {
 
-    const externals = [
-      // required if you encounter graphql errors during the build step
-      'graphql/language/visitor',
-      'graphql/language/printer',
-      'graphql/utilities'
-    ];
-    config.externals.push(...externals);
-    return config;
-  },
+  //   const externals = [
+  //     // required if you encounter graphql errors during the build step
+  //     'graphql/language/visitor',
+  //     'graphql/language/printer',
+  //     'graphql/utilities'
+  //   ];
+  //   config.externals.push(...externals);
+  //   return config;
+  // },
 };
 
 export default nextConfig;
