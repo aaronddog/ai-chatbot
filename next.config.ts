@@ -11,6 +11,17 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  webpack: (config, { isServer }) => {
+
+    const externals = [
+      // required if you encounter graphql errors during the build step
+      'graphql/language/visitor',
+      'graphql/language/printer',
+      'graphql/utilities'
+    ];
+    config.externals.push(...externals);
+    return config;
+  },
 };
 
 export default nextConfig;
