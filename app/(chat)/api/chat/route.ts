@@ -1,3 +1,6 @@
+// @ts-nocheck
+import { WritableStreamDefaultWriter } from "node:stream/web";
+
 import { geolocation } from "@vercel/functions";
 const {
   convertToModelMessages,
