@@ -1,14 +1,12 @@
-// @ts-nocheck
-
 import { geolocation } from "@vercel/functions";
-const {
+import {
   convertToModelMessages,
   createUIMessageStream,
   JsonToSseTransformStream,
   smoothStream,
   stepCountIs,
   streamText,
-} = require("ai");
+} from "ai";
 import { unstable_cache as cache } from "next/cache";
 import { after } from "next/server";
 import {

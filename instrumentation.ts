@@ -1,16 +1,9 @@
-// @ts-nocheck
 import { registerOTel } from "@vercel/otel";
 
-export function register() {
-  if (typeof window === "undefined" && typeof EdgeRuntime === "undefined") {
-    require('dd-trace').init({
-      llmobs: {
-        mlApp: "ai-chatbot",
-        agentlessEnabled: true,
-      },
-      site: "datadoghq.com",
-      env: "prod",
-    });
+export async function register() {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const initializeImportName = 'dd-trace/initialize.mjs';
+    await import(/* webpackIgnore: true */ initializeImportName as 'dd-trace/initialize.mjs')
   }
   registerOTel({ serviceName: "ai-chatbot" });
 }
